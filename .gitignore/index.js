@@ -17,7 +17,7 @@ Bot.on('ready', function() {
 
 
 
-Bot.login();
+Bot.login(process.env.TOKEN);
 
 Bot.on('message', message => {
     if (message.content.startsWith( prefix + 'help')) {
