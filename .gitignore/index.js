@@ -17,7 +17,7 @@ Bot.on('ready', function() {
 
 
 
-Bot.login(process.env.TOKEN);
+Bot.login("NzQ4NDkwMjgyNDk1OTAxNzU4.X0eL5Q.I8nhrEoWTXWg5m1Nip8F6Jz6KEo");
 
 Bot.on('message', message => {
     if (message.content.startsWith( prefix + 'help')) {
