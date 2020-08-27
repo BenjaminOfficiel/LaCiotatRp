@@ -17,7 +17,7 @@ Bot.on('ready', function() {
 
 
 
-Bot.login("NzQ4NDkwMjgyNDk1OTAxNzU4.X0eL5Q.I8nhrEoWTXWg5m1Nip8F6Jz6KEo");
+Bot.login("NzQ4NDkwMjgyNDk1OTAxNzU4.X0eL5Q.__Q6MdcBGDYfq0MQiZdhzVwfAXs");
 
 Bot.on('message', message => {
     if (message.content.startsWith( prefix + 'help')) {
