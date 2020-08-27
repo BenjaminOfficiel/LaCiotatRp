@@ -10,7 +10,7 @@ Bot.on('ready', function() {
     console.log("Bot reveille")
 	Bot.on('ready', function() {
 		console.log("Bot reveille")
-		Bot.user.setActivity("La Ciotat : Role Play ", {type: 'WATCHING'})
+		Bot.user.setActivity("La Ciotat : Role Play ", {type: 'PLAYING'})
 	}); 
 })
 
