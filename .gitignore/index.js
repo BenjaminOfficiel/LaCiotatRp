@@ -21,7 +21,7 @@ Bot.on("ready", async () =>{
 
 
 
-Bot.login("NzQ4NDkwMjgyNDk1OTAxNzU4.X0eL5Q.S90nvxs0A67Ctntt4Uk_gzIwAv4");
+Bot.login(process.env.TOKEN);
 
 Bot.on('message', message => {
     if (message.content.startsWith( prefix + 'help')) {
