@@ -1,23 +1,27 @@
 const Discord = require("discord.js");
 const Bot = new Discord.Client();
 const ytdl = require("ytdl-core")
+const bdd = require('./bdd.json');
+const fs = require("fs");
 var prefix = "/";
 
 
 
 
-Bot.on('ready', function() {
-    console.log("Bot reveille")
-	Bot.on('ready', function() {
-		console.log("Bot reveille")
-		Bot.user.setActivity("La Ciotat : Role Play ", {type: 'WATCHING'})
-	}); 
-})
+Bot.on("ready", async () =>{
+    console.log("Le Bot est allumé")
+    console.log("Toutes Les Commandes Sont Fonctionnel")
+    Bot.user.setStatus("online");
+    setTimeout(() => {
+        Bot.user.setActivity("・𝐿𝑎𝐶𝑖𝑜𝑡𝑎𝑡 𝑅𝑃 ・", {type: 'PLAYING'} );
+    }, 100)
+    
+});
 
 
 
 
-Bot.login(process.env.TOKEN);
+Bot.login("NzQ4NDkwMjgyNDk1OTAxNzU4.X0eL5Q.S90nvxs0A67Ctntt4Uk_gzIwAv4");
 
 Bot.on('message', message => {
     if (message.content.startsWith( prefix + 'help')) {
@@ -46,6 +50,60 @@ Bot.on('message', message => {
 			  message.channel.send(monembed);
     }
   
+    if(message.content.startsWith( prefix+ 'Warn')){
+        message.delete() 
+        if(message.member.hasPermission('KICK_MEMBERS')){
+          
+            if(!message.mentions.users.first())return;
+            utilisateur = message.mentions.users.first().id
+
+            if(bdd["warn"][utilisateur] == 6){
+               
+                delete bdd["warn"][utilisateur]
+                message.guild.members.kick(utilisateur)
+             }
+            else{
+                if(!bdd["warn"][utilisateur]){
+                    bdd["warn"][utilisateur] = 1
+                    Savebdd();
+                    message.channel.send("L'utilisateur a obtenu(e) " + bdd["warn"][utilisateur] + " Avertissement !");
+                }
+                else{
+                    bdd["warn"][utilisateur]++
+                    Savebdd();
+                    message.channel.send("L'utilisateur a obtenu(e) " + bdd["warn"][utilisateur] + " Avertissement !");
+                }
+            }
+        }
+    }
+
+    if(message.content.startsWith( prefix + 'warnings')){
+        message.delete()
+        if(message.member.hasPermission('KICK_MEMBERS')){
+          
+            if(!message.mentions.users.first())return;
+            utilisateur = message.mentions.users.first().id
+
+            if(bdd["warn"][utilisateur] == 6){
+               
+                delete bdd["warn"][utilisateur]
+                message.guild.members.kick(utilisateur)
+             }
+            else{
+                if(!bdd["warn"][utilisateur]){
+                    bdd["warn"][utilisateur] + 0
+                    Savebdd();
+                    message.channel.send("L'utilisateur a " + bdd["warn"][utilisateur] + " Warn !");
+                }
+                else{
+                    bdd["warn"][utilisateur]==
+                    Savebdd();
+                    message.channel.send("L'utilisateur a " + bdd["warn"][utilisateur] + " Warn !");
+                }
+            }
+        }
+    }
+
     if(message.content.startsWith(prefix + "lc")) {
 		message.delete()
 	  
@@ -95,6 +153,18 @@ Bot.on('message', message => {
 		
  );
 
+
+
+ function Savebdd() {
+    fs.writeFile("./bdd.json", JSON.stringify(bdd, null, 4), (err) => {
+        if (err) message.channel.send("Une erreur est survenue.");
+    });
+            
+
+    
+};
+
+
  Bot.on('message', message => {
     if (message.content.startsWith( prefix +"play")) {
 		if(message.member.voice.channel){
@@ -103,7 +173,7 @@ Bot.on('message', message => {
             	let args = message.content.split(" ");
 				
 				let dispatcher = connection.play(ytdl(args[1], {qualtiy: "highestaudio"}));
-	
+
 				dispatcher.on("finish", () =>{
                     dispatcher.destroy();
                     connection.disconnect();
