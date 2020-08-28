@@ -29,13 +29,14 @@ Bot.on('message', message => {
      
  
         const monembed = new Discord.MessageEmbed()
-	   .setDescription("_**・𝐿𝑎𝐶𝑖𝑜𝑡𝑎𝑡 𝑅𝑃 ・**_")
+	   .setTitle("▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅")
 	   .setColor("RANDOM")
-	   .addField("__𝐹𝑢𝑛__", "▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅")
-	   .addField("__𝑀𝑢𝑠𝑖𝑐__", "▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅")
-	   .addField("__𝑀𝑜𝑑𝑒́𝑟𝑎𝑡𝑖𝑜𝑛 __", "▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅")
-	   .setImage('https://cdn.discordapp.com/attachments/608711483265908761/740688658893373511/image0.gif')
-	   .addField("__𝑃𝑟𝑜𝑡𝑒𝑐𝑡𝑖𝑜𝑛__", "▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅")
+       .setAuthor("𝑀𝑢𝑠𝑖𝑐")
+       .addField(" Pour mètre de la music : /play {lien Obligatoire sinon sa marche pas on bosse dessus hm}", ("▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅"))
+       .addField("Pour dégagé le bot du vocal : /leave", ("▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅"))
+       .addField(" Il y auras plusieurs commandes par la suite ...", ("▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅"))
+       .setDescription("Voici notre bot discord : ")
+	   .setImage('https://cdn.discordapp.com/attachments/742035953182441473/748860425109504010/Capture_decran_2020-08-28_a_13.03.39.png')
 	   .setFooter('𝐷𝑒𝑣 𝐵𝑦 | 𝑅𝑎𝑦𝑎𝑛 | 𝐵𝑒𝑛𝑗𝑎𝑚𝑎𝑖𝑛 ', 'https://www.onlygraphicdesign.com/wp-content/uploads/2017/08/gif-collection-tomas-brundson.gif');
 	   message.channel.send(monembed);
     }
@@ -50,7 +51,7 @@ Bot.on('message', message => {
 			  message.channel.send(monembed);
     }
   
-    if(message.content.startsWith( prefix+ 'Warn')){
+    if(message.content.startsWith( prefix+ 'warn')){
         message.delete() 
         if(message.member.hasPermission('KICK_MEMBERS')){
           
@@ -77,7 +78,7 @@ Bot.on('message', message => {
         }
     }
 
-    if(message.content.startsWith( prefix + 'warnings')){
+    if(message.content.startsWith( prefix + 'Warnings')){
         message.delete()
         if(message.member.hasPermission('KICK_MEMBERS')){
           
@@ -126,14 +127,14 @@ Bot.on('message', message => {
                     let args = message.content.trim().split(/ +/g);
         
                     if(args[1]){
-                        if(!isNaN(args[1]) && args[1] >= 1 && args[1] <= 99){
+                        if(!isNaN(args[1]) && args[1] >= 1 && args[1] <= 999){
         
                             message.channel.bulkDelete(args[1])
                            
                             
                         }
                         else{
-                            message.channel.send(`Vous devez indiquer une valeur entre 1 et 99 !`)
+                            message.channel.send(`Vous devez indiquer une valeur entre 1 et 999 !`)
                         }
                         
                     }
@@ -167,6 +168,7 @@ Bot.on('message', message => {
 
  Bot.on('message', message => {
     if (message.content.startsWith( prefix +"play")) {
+        message.delete()
 		if(message.member.voice.channel){
 			message.member.voice.channel.join().then(connection => {
                 message.reply("_**Music lancé Profite bien sur Notre Serveur : LaCiotat:RolePlay .  **_")
@@ -191,5 +193,25 @@ Bot.on('message', message => {
 			message.reply("_**Vous etes pas connecté en vocal .**_")
         }
 
-        }})
+        }
+    
+        if (message.content.startsWith( prefix + 'leave')) {
+            message.delete()
+            if(message.member.voice.channel){
+                message.member.voice.channel.leave()
+                message.reply("_**Le Bot vient de se déconnecter**_")
+
+                
+            }
+        }
+
+        if (message.content.startsWith( prefix + 'stop')) {
+            message.delete()
+            if(message.member.voice.channel){
+                message.member.voice.channel.leave()
+                message.reply("_**La Musique vient de s'arrêter !**_")
+            }
+        }
+    
+    })
        
